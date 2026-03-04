@@ -17,6 +17,12 @@
 
 <body>
 
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- FILM GRAIN NOISE OVERLAY -->
+    <div class="noise-overlay"></div>
+
     <!-- NAV -->
     <header class="nav" id="nav">
         <a href="#hero" class="nav-logo">AJ</a>
@@ -50,7 +56,7 @@
                 <p class="hero-pre">Hello, I'm</p>
                 <h1 class="hero-name">Aanya<br><em>Jain</em></h1>
                 <p class="hero-role">AI Engineering &amp; Data Science</p>
-                <p class="hero-sub">Building technology that thinks, learns, and makes an impact.</p>
+                <p class="hero-sub" id="hero-typing"></p>
                 <div class="hero-links">
                     <a href="https://github.com/aany30" target="_blank" class="hero-link">GitHub ↗</a>
                     <a href="https://www.linkedin.com/in/aanya-jain-34621436b/" target="_blank"
@@ -150,7 +156,7 @@
 
                     <div class="about-text-side">
                         <p class="section-tag">Get to Know Me</p>
-                        <h2 class="section-title about-title">Hi, I'm<br><em>Aanya.</em></h2>
+                        <h2 class="section-title about-title">The person behind<br><em>the products.</em></h2>
                         <p class="about-body">I'm passionate about exploring how AI can be used to solve real world
                             problems. Currently, I'm building my technical foundation in LLMs, machine learning, and
                             Python, with a focus on designing practical and scalable solutions.</p>
@@ -275,7 +281,8 @@
                         </div>
                         <div class="win-info">
                             <span class="win-tag">Mentorship</span>
-                            <h3 class="win-title">Teaching 700+ Students AI</h3>
+                            <h3 class="win-title">Teaching <span class="count-up" data-count="700">0</span>+ Students AI
+                            </h3>
                             <p class="win-desc">I conducted a session for 11th and 12th grade students introducing them
                                 to AI — what it is, how it works, and guiding them through building a simple chatbot.
                                 Watching their curiosity turn into excitement as they understood and built something
@@ -306,7 +313,8 @@
                             <h3 class="win-title">Building Unordr from Zero</h3>
                             <p class="win-desc">Built a D2C brand selling vinyls, posters, trays and glasses — from
                                 zero. Ran performance marketing campaigns, built the website, and handled direct
-                                customer relationships end to end. Crossed ₹50K+ in revenue and experienced first-hand
+                                customer relationships end to end. Crossed ₹<span class="count-up"
+                                    data-count="50">0</span>K+ in revenue and experienced first-hand
                                 what it takes to build something people actually want to buy.</p>
                         </div>
                     </div>

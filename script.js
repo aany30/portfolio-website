@@ -182,4 +182,123 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* ── 11. Staggered Skill Pill Fade ───────────────────── */
+    const pillObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const pills = entry.target.querySelectorAll('.spill');
+            pills.forEach((pill, i) => {
+                pill.style.opacity = '0';
+                pill.style.transform = 'translateX(-10px)';
+                setTimeout(() => {
+                    pill.style.transition = `opacity 0.6s ease, transform 0.6s ease`;
+                    pill.style.opacity = '1';
+                    pill.style.transform = 'translateX(0)';
+                }, 150 + i * 50);
+            });
+            pillObs.unobserve(entry.target);
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.skills-band').forEach(band => pillObs.observe(band));
+
+    /* ── 12. Hover 3D Tilt on Photos ────────────────────── */
+    const tiltEls = document.querySelectorAll('.about-photo, .split-photo, .hero-photo-frame');
+    tiltEls.forEach(el => {
+        el.addEventListener('mousemove', e => {
+            const rect = el.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            el.style.transition = 'transform 0.1s ease';
+            el.style.transform = `perspective(600px) rotateY(${x * 10}deg) rotateX(${y * -10}deg) scale3d(1.03, 1.03, 1.03)`;
+        });
+        el.addEventListener('mouseleave', () => {
+            el.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+            el.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
+        });
+    });
+
+    /* ── 13. Text Highlight on Scroll ───────────────────── */
+    document.querySelectorAll('.about-body').forEach(p => {
+        // Skip the signature line
+        if (p.classList.contains('about-sign')) return;
+
+        const originalHTML = p.innerHTML;
+        const words = originalHTML.split(/\s+/);
+        p.innerHTML = words.map(w => `<span class="scroll-word">${w}</span>`).join(' ');
+    });
+
+    const wordEls = document.querySelectorAll('.scroll-word');
+    const highlightOnScroll = () => {
+        wordEls.forEach(word => {
+            const rect = word.getBoundingClientRect();
+            const viewMid = window.innerHeight * 0.7;
+            if (rect.top < viewMid) {
+                word.classList.add('highlighted');
+            }
+        });
+    };
+    window.addEventListener('scroll', highlightOnScroll, { passive: true });
+    highlightOnScroll(); // Run once on load
+
+    /* ── 14. Hero Typing Animation ──────────────────────── */
+    const typingEl = document.getElementById('hero-typing');
+    if (typingEl) {
+        const text = 'Building technology that thinks, learns, and makes an impact.';
+        let i = 0;
+        const cursor = document.createElement('span');
+        cursor.classList.add('typing-cursor');
+        typingEl.appendChild(cursor);
+
+        const typeChar = () => {
+            if (i < text.length) {
+                typingEl.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+                i++;
+                setTimeout(typeChar, 45 + Math.random() * 35);
+            }
+        };
+        setTimeout(typeChar, 800); // Start after page settles
+    }
+
+    /* ── 15. Number Counter Animation ───────────────────── */
+    const countObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-count'), 10);
+            const duration = 2000;
+            const start = performance.now();
+
+            const animate = (now) => {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target);
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    el.textContent = target;
+                }
+            };
+            requestAnimationFrame(animate);
+            countObs.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.count-up').forEach(el => countObs.observe(el));
+
+    /* ── 16. Scroll Progress Bar ────────────────────────── */
+    const progressBar = document.getElementById('progress-bar');
+    if (progressBar) {
+        const updateProgress = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        };
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+    }
+
 });
