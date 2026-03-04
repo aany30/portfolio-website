@@ -1447,6 +1447,22 @@ a.cd-val:hover {
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
+
+    .wins-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .win-media {
+        aspect-ratio: 16/10;
+    }
+
+    .win-title {
+        font-size: 1.2rem;
+    }
+
+    .win-info {
+        padding: 1.25rem 1.5rem 1.5rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1471,6 +1487,24 @@ a.cd-val:hover {
     .hero {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+        gap: 2.5rem;
+    }
+
+    .hero-photo-frame {
+        max-height: 320px;
+        aspect-ratio: 3/4;
+    }
+
+    .hero-photo-frame img {
+        object-position: top center;
+    }
+
+    .about-photo {
+        max-height: 300px;
+    }
+
+    .split-photo {
+        max-height: 250px;
     }
 
     .footer {
@@ -1496,5 +1530,21 @@ a.cd-val:hover {
 
     .contact-heading {
         font-size: 2.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .win-media {
+        aspect-ratio: 4/3;
+    }
+
+    .win-desc {
+        font-size: 0.82rem;
+    }
+
+    .build-card {
+        padding: 1.5rem;
     }
 }
