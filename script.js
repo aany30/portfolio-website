@@ -157,4 +157,29 @@ document.addEventListener('DOMContentLoaded', () => {
         videoObs.observe(mentorVideo);
     }
 
+    /* ── 9. Magnetic Card Glow Effect ────────────────────── */
+    document.querySelectorAll('.build-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+
+    /* ── 10. Hero Parallax Effect ────────────────────────── */
+    const heroSection = document.getElementById('hero');
+    const heroPhoto = document.querySelector('.hero-photo-frame img');
+    if (heroSection && heroPhoto) {
+        heroSection.addEventListener('mousemove', e => {
+            const x = (window.innerWidth / 2 - e.pageX) / 25;
+            const y = (window.innerHeight / 2 - e.pageY) / 25;
+            heroPhoto.style.transform = `scale(1.05) translate(${x}px, ${y}px)`;
+        });
+        heroSection.addEventListener('mouseleave', () => {
+            heroPhoto.style.transform = 'scale(1) translate(0px, 0px)';
+        });
+    }
+
 });
