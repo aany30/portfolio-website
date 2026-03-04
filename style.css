@@ -602,14 +602,28 @@ strong {
     align-items: start;
 }
 
+/* Two-photo stacked duo layout */
+.about-photos-duo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
 .about-photo {
     width: 100%;
-    aspect-ratio: 3/4;
     border-radius: 16px;
     overflow: hidden;
     background: var(--bg-raised);
     border: 1px solid var(--border);
     position: relative;
+}
+
+.about-photo-main {
+    aspect-ratio: 3/4;
+}
+
+.about-photo-second {
+    aspect-ratio: 4/3;
 }
 
 .about-photo img {
@@ -618,22 +632,11 @@ strong {
     object-fit: cover;
     object-position: top center;
     transition: transform 6s ease;
+    display: block;
 }
 
 .about-photo:hover img {
-    transform: scale(1.04);
-}
-
-.about-initials {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--serif);
-    font-size: 6rem;
-    color: var(--text-dim);
-    pointer-events: none;
+    transform: scale(1.03);
 }
 
 .about-section .section-tag {
@@ -655,6 +658,14 @@ strong {
     font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.82;
+}
+
+.about-sign {
+    font-style: italic;
+    color: var(--accent);
+    font-family: var(--serif);
+    font-size: 1rem;
+    margin-top: 0.5rem;
 }
 
 .about-meta {
@@ -767,6 +778,48 @@ strong {
     margin-bottom: 2rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border);
+}
+
+/* Content 2-column split (e.g. Education) */
+.content-split {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.split-photo {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+}
+
+.split-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 6s ease;
+    display: block;
+}
+
+.split-photo:hover img {
+    transform: scale(1.03);
+}
+
+@media (max-width: 900px) {
+    .content-split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .split-photo {
+        aspect-ratio: 16/9;
+    }
 }
 
 /* Work cards (synchronized grid) */
@@ -900,11 +953,10 @@ strong {
 }
 
 /* ─── Small Wins ──────────────────────────────────────────── */
-.small-wins-section {}
 
 .wins-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
 }
 
@@ -946,6 +998,12 @@ strong {
 .win-card:hover .win-media video,
 .win-card:hover .win-media img {
     transform: scale(1.03);
+}
+
+/* Unordr image — fill card fully */
+.win-media img[src="unordr.jpeg"] {
+    object-fit: cover;
+    object-position: center;
 }
 
 /* Placeholder shown when media is missing */
@@ -1089,10 +1147,13 @@ a.cd-val:hover {
     cursor: default;
 }
 
-/* ─── Footer ──────────────────────────────────────────────── */
+/* ─── Footer ─────────────────────────────────────────────── */
 .footer {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     padding: 1.5rem 2.5rem;
     border-top: 1px solid var(--border);
     font-size: 0.78rem;
@@ -1100,6 +1161,23 @@ a.cd-val:hover {
     font-weight: 500;
     letter-spacing: 0.02em;
     background: var(--bg-subtle);
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
 }
 
 /* ─── Scroll Reveal ───────────────────────────────────────── */

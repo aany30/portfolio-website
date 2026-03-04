@@ -141,4 +141,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.skill-category').forEach(c => skillObs.observe(c));
 
+
+    /* ── 8. Scroll-visibility video autoplay ────────────────── */
+    const mentorVideo = document.getElementById('mentorship-video');
+    if (mentorVideo) {
+        const videoObs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    mentorVideo.play().catch(() => { });
+                } else {
+                    mentorVideo.pause();
+                }
+            });
+        }, { threshold: 0.35 });
+        videoObs.observe(mentorVideo);
+    }
+
 });
