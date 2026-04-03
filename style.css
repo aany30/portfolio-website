@@ -309,7 +309,7 @@ strong {
 .hero {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: 1.3fr 0.7fr;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -399,7 +399,7 @@ strong {
 .hero-photo-frame {
     width: 100%;
     aspect-ratio: 3/4;
-    max-height: 520px;
+    max-height: 460px;
     border-radius: 20px;
     overflow: hidden;
     background: var(--bg-raised);
