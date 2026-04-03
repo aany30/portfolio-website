@@ -301,4 +301,77 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgress();
     }
 
+    /* ── 17. Coverflow Project Carousel ─────────────────── */
+    const carouselTrack = document.getElementById('carousel-track');
+    const carouselCards = document.querySelectorAll('.carousel-card');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    if (carouselTrack && carouselCards.length) {
+        let current = 0;
+        const total = carouselCards.length;
+
+        const updateCarousel = (index) => {
+            current = (index + total) % total;
+            carouselCards.forEach((card, i) => {
+                card.classList.remove('active', 'adjacent');
+                const diff = ((i - current) + total) % total;
+                if (diff === 0) {
+                    card.classList.add('active');
+                } else if (diff === 1 || diff === total - 1) {
+                    card.classList.add('adjacent');
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === current);
+            });
+
+            // Shift track so active card is centered
+            const cardWidth = carouselCards[0].offsetWidth;
+            const gap = 24; // 1.5rem
+            const offset = current * (cardWidth + gap);
+            carouselTrack.style.transform = `translateX(calc(50% - ${offset + cardWidth / 2}px - ${cardWidth * 0.08}px))`;
+        };
+
+        // Arrow buttons
+        prevBtn.addEventListener('click', () => updateCarousel(current - 1));
+        nextBtn.addEventListener('click', () => updateCarousel(current + 1));
+
+        // Dot buttons
+        dots.forEach((dot, i) => dot.addEventListener('click', () => updateCarousel(i)));
+
+        // Click on adjacent card to focus it
+        carouselCards.forEach((card, i) => {
+            card.addEventListener('click', () => {
+                if (i !== current) updateCarousel(i);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const section = document.getElementById('building');
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                if (e.key === 'ArrowLeft') updateCarousel(current - 1);
+                if (e.key === 'ArrowRight') updateCarousel(current + 1);
+            }
+        });
+
+        // Touch / swipe support
+        let touchStartX = 0;
+        carouselTrack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        carouselTrack.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 50) updateCarousel(dx < 0 ? current + 1 : current - 1);
+        }, { passive: true });
+
+        // Initial render
+        updateCarousel(0);
+
+        // Re-calculate on resize
+        window.addEventListener('resize', () => updateCarousel(current));
+    }
+
 });

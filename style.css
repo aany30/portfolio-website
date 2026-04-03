@@ -535,7 +535,115 @@ strong {
     color: var(--accent);
 }
 
-/* ─── What I'm Building ───────────────────────────────────── */
+/* ─── Coverflow Carousel ──────────────────────────────────── */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0 5rem;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+}
+
+.carousel-card {
+    flex: 0 0 52%;
+    max-width: 600px;
+    transition:
+        transform 0.65s cubic-bezier(0.77, 0, 0.175, 1),
+        opacity 0.65s cubic-bezier(0.77, 0, 0.175, 1),
+        filter 0.65s cubic-bezier(0.77, 0, 0.175, 1),
+        box-shadow 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+    transform: scale(0.82);
+    opacity: 0.35;
+    filter: blur(1.5px);
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.carousel-card.active {
+    transform: scale(1);
+    opacity: 1;
+    filter: none;
+    pointer-events: auto;
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px var(--border-mid),
+        0 0 60px rgba(126, 142, 126, 0.08);
+}
+
+.carousel-card.adjacent {
+    transform: scale(0.87);
+    opacity: 0.5;
+    filter: blur(0.5px);
+    pointer-events: auto;
+}
+
+/* Nav arrows */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    background: rgba(24, 24, 27, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-mid);
+    color: var(--text);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: var(--bg-raised);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.carousel-prev { left: 0; }
+.carousel-next { right: 0; }
+
+/* Dot indicators */
+.carousel-dots {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.6rem;
+}
+
+.carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.35s ease;
+    padding: 0;
+}
+
+.carousel-dot.active {
+    width: 22px;
+    border-radius: 3px;
+    background: var(--accent);
+}
+
+/* Legacy .build-cards (unused but safe to keep) */
 .build-cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
