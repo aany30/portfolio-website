@@ -301,37 +301,4 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgress();
     }
 
-    /* ── 17. Project Carousel ───────────────────────────── */
-    const carouselTrack = document.getElementById('carousel-track');
-    const carouselCards = document.querySelectorAll('.carousel-card');
-    const dots = document.querySelectorAll('.carousel-dot');
-    const prevBtn = document.getElementById('carousel-prev');
-    const nextBtn = document.getElementById('carousel-next');
-
-    if (carouselTrack && carouselCards.length) {
-        const scrollByCard = (dir) => {
-            const cardWidth = carouselCards[0].offsetWidth + 20; // card + gap
-            carouselTrack.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
-        };
-
-        prevBtn.addEventListener('click', () => scrollByCard(-1));
-        nextBtn.addEventListener('click', () => scrollByCard(1));
-
-        // Sync dots on scroll
-        const syncDots = () => {
-            const cardWidth = carouselCards[0].offsetWidth + 20;
-            const index = Math.round(carouselTrack.scrollLeft / cardWidth);
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-        };
-        carouselTrack.addEventListener('scroll', syncDots, { passive: true });
-
-        // Dot click nav
-        dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                const cardWidth = carouselCards[0].offsetWidth + 20;
-                carouselTrack.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
-            });
-        });
-    }
-
 });
