@@ -535,10 +535,10 @@ strong {
     color: var(--accent);
 }
 
-/* ─── Project Grid (3-column) ─────────────────────────────── */
+/* ─── Project Grid (2-column for 4 items) ─────────────────── */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
     align-items: stretch;
 }
@@ -973,7 +973,7 @@ strong {
 /* Work cards (synchronized grid) */
 .work-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
